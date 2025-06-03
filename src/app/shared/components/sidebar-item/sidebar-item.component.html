@@ -1,0 +1,44 @@
+<li>
+  @if (children().length === 0){
+  <a
+    href="#"
+    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+  >
+    <span
+      class="pi pi-search transition duration-75 text-gray-400 group-hover:text-white"
+    ></span>
+    <span class="ms-3">{{ title() | titlecase }}</span>
+  </a>
+  }
+  <!--  -->
+  @else {
+
+  <button
+    type="button"
+    class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group text-white hover:bg-gray-700"
+    aria-controls="dropdown-items"
+    data-collapse-toggle="dropdown-items"
+    (click)="toggleExpanded()"
+  >
+    <span
+      class="pi pi-search transition duration-75 text-gray-400 group-hover:text-white"
+    ></span>
+    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap"
+      >E-commerce</span
+    >
+
+    <span class="pi pi-chevron-down transition duration-75"></span>
+  </button>
+  <ul id="dropdown-items" class="py-2 space-y-2" [class.hidden]="!isExpanded()">
+    @for (link of children(); track link.title) {
+    <li>
+      <a
+        href="#"
+        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+        >{{ link.title }}</a
+      >
+    </li>
+    }
+  </ul>
+  }
+</li>
