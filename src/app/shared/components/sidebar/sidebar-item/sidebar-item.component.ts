@@ -1,6 +1,6 @@
 import { Component, input, signal } from '@angular/core';
-import { SidebarItem as SidebarItemModel } from '../../../core/models';
-import { SidebarItemType as SidebarItemTypeEnum } from '../../../core/enums/ui.enum';
+import { SidebarItem as SidebarItemModel } from '../../../../core/models';
+import { SidebarItemType as SidebarItemTypeEnum } from '../../../../core/enums/ui.enum';
 import { TitleCasePipe } from '@angular/common';
 
 @Component({

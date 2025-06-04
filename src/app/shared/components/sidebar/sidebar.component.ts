@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PanelMenuModule } from 'primeng/panelmenu';
-import { SidebarItem } from '../sidebar-item/sidebar-item.component';
 import { Avatar } from '../avatar/avatar.component';
+import { SidebarItem } from './sidebar-item/sidebar-item.component';
 
 @Component({
   selector: 'app-sidebar',

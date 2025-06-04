@@ -1,0 +1,14 @@
+<div>
+  <p-drawer header="Left Drawer" [(visible)]="showDrawer" position="right">
+    @if (showDrawer()) {
+    <settings-form></settings-form>
+    }
+  </p-drawer>
+
+  <p-button
+    class="flex items-center justify-center rounded-full"
+    (click)="toggleShow()"
+  >
+    <i class="pi pi-ellipsis-v"></i>
+  </p-button>
+</div>
