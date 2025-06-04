@@ -16,4 +16,8 @@ export class SettingsDrawer {
   toggleShow() {
     this.showDrawer.update((ps) => !ps);
   }
+
+  closeModal() {
+    this.showDrawer.set(false);
+  }
 }
