@@ -15,16 +15,24 @@
   >
   }
 
-  <form action="" class="flex flex-col gap-6">
-    <p-floatlabel variant="in">
-      <input pInputText id="in_label" autocomplete="off" fluid />
-      <label for="in_label">Project name</label>
-    </p-floatlabel>
+  <form
+    class="flex flex-col gap-6"
+    [formGroup]="editForm"
+    (ngSubmit)="handleSubmit()"
+  >
+    <app-input
+      formControlName="projectName"
+      label="Project name"
+      id="projectName"
+      [error]="formsService.getFormControlError(editForm, 'projectName')"
+    />
 
-    <p-floatlabel variant="in">
-      <input pInputText id="in_label" autocomplete="off" fluid />
-      <label for="in_label">Repository</label>
-    </p-floatlabel>
+    <app-input
+      formControlName="repository"
+      label="Repository"
+      id="projectRepository"
+      [error]="formsService.getFormControlError(editForm, 'repository')"
+    />
 
     <p-floatlabel variant="on">
       <textarea
@@ -35,17 +43,20 @@
         style="resize: none"
         class="h-full"
         fluid
+        formControlName="description"
       ></textarea>
       <label for="on_label">Description</label>
     </p-floatlabel>
+
+    @if(editForm.controls.description.errors){
+    <small id="username-help"
+      >Enter your username to reset your password.</small
+    >
+    }
   </form>
+
   <ng-template #footer>
-    <p-button
-      label="Cancel"
-      [text]="true"
-      severity="secondary"
-      (click)="show.set(false)"
-    />
-    <p-button label="Save" (click)="show.set(false)" />
+    <p-button label="Cancel" [text]="true" severity="secondary" />
+    <p-button label="Save" type="submit" />
   </ng-template>
 </p-dialog>

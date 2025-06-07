@@ -1,0 +1,69 @@
+import { CommonModule } from '@angular/common';
+import { Component, forwardRef, input, signal } from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControlName,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { InputTextModule } from 'primeng/inputtext';
+import { MessageModule } from 'primeng/message';
+
+@Component({
+  selector: 'app-input',
+  templateUrl: './input.component.html',
+  imports: [
+    FloatLabelModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    CommonModule,
+    MessageModule,
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => AppInput),
+      multi: true,
+    },
+  ],
+})
+export class AppInput implements ControlValueAccessor {
+  formControlName = input<FormControlName['name']>(null);
+  label = input<string>();
+  id = input.required<string>();
+
+  value = signal<string>('');
+
+  onChange = (_: any) => {};
+  onTouched = () => {};
+
+  disabled = signal<boolean>(false);
+
+  error = input<string | null>(null);
+
+  writeValue(value: any): void {
+    console.log('Writing this value', value);
+
+    this.value.set(value);
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled.set(isDisabled);
+  }
+
+  updateValue(event: Event) {
+    const newValue = (event.target as HTMLInputElement).value;
+    this.value.set(newValue);
+    this.onChange(newValue);
+    this.onTouched();
+  }
+}
