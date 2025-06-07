@@ -1,0 +1,51 @@
+<p-dialog
+  [(visible)]="show"
+  (visibleChange)="handleVisibleChange($event)"
+  [modal]="true"
+  [draggable]="false"
+  styleClass="w-[25rem] max-w-[90%]"
+>
+  <ng-template #header>
+    <h3 class="text-3xl font-bold">{{ title() }}</h3>
+  </ng-template>
+
+  @if (isEditing()){
+  <span class="text-surface-500 dark:text-surface-400 block mb-8"
+    >Update your information.</span
+  >
+  }
+
+  <form action="" class="flex flex-col gap-6">
+    <p-floatlabel variant="in">
+      <input pInputText id="in_label" autocomplete="off" fluid />
+      <label for="in_label">Project name</label>
+    </p-floatlabel>
+
+    <p-floatlabel variant="in">
+      <input pInputText id="in_label" autocomplete="off" fluid />
+      <label for="in_label">Repository</label>
+    </p-floatlabel>
+
+    <p-floatlabel variant="on">
+      <textarea
+        pTextarea
+        id="over_label"
+        rows="6"
+        cols="30"
+        style="resize: none"
+        class="h-full"
+        fluid
+      ></textarea>
+      <label for="on_label">Description</label>
+    </p-floatlabel>
+  </form>
+  <ng-template #footer>
+    <p-button
+      label="Cancel"
+      [text]="true"
+      severity="secondary"
+      (click)="show.set(false)"
+    />
+    <p-button label="Save" (click)="show.set(false)" />
+  </ng-template>
+</p-dialog>

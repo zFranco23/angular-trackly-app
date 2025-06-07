@@ -1,9 +1,18 @@
-<div>
-  <section-header
-    title="Dashboard"
-    description="Check all your projects"
-    [showTooltip]="true"
-  ></section-header>
+<!-- Edit/Add project modal -->
+<project-edit-modal [(show)]="isOpenProjectModal"></project-edit-modal>
+<!-- Edit/Add project modal -->
 
-  <projects-list></projects-list>
-</div>
+<section-header
+  title="Dashboard"
+  description="Check all your projects"
+  [showTooltip]="true"
+>
+  <p-button
+    ngProjectAs="actions"
+    icon="pi pi-plus"
+    label="Add project"
+    (click)="isOpenProjectModal.set(true)"
+  ></p-button>
+</section-header>
+
+<projects-list></projects-list>

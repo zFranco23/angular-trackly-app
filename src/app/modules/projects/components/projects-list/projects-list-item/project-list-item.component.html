@@ -21,17 +21,19 @@
           severity="secondary"
           class="w-full"
           [outlined]="true"
-          styleClass="w-full"
+          styleClass="w-full h-full"
+          fluid
         >
-          Go to repo
+          <i class="pi pi-github"></i>
         </p-button>
         <p-button
           class="w-full"
-          label="Edit"
           styleClass="w-full"
-          icon="pi pi-pencil"
-          iconPos="right"
-        ></p-button>
+          fluid
+          (onClick)="editClickBtn.emit(project())"
+        >
+          <i class="pi pi-pencil"></i>
+        </p-button>
       </div>
     </ng-template>
   </p-card>
