@@ -10,13 +10,13 @@
   </ng-template>
 
   @if (isEditing()){
-  <span class="text-surface-500 dark:text-surface-400 block mb-8"
+  <span class="text-surface-500 dark:text-surface-400 block mb-4"
     >Update your information.</span
   >
   }
 
   <form
-    class="flex flex-col gap-6"
+    class="flex flex-col gap-4"
     [formGroup]="editForm"
     (ngSubmit)="handleSubmit()"
   >
@@ -34,29 +34,26 @@
       [error]="formsService.getFormControlError(editForm, 'repository')"
     />
 
-    <p-floatlabel variant="on">
-      <textarea
-        pTextarea
-        id="over_label"
-        rows="6"
-        cols="30"
-        style="resize: none"
-        class="h-full"
-        fluid
-        formControlName="description"
-      ></textarea>
-      <label for="on_label">Description</label>
-    </p-floatlabel>
-
-    @if(editForm.controls.description.errors){
-    <small id="username-help"
-      >Enter your username to reset your password.</small
-    >
-    }
+    <app-textarea
+      formControlName="description"
+      label="Description"
+      id="projectDescription"
+      [error]="formsService.getFormControlError(editForm, 'description')"
+    />
   </form>
 
   <ng-template #footer>
-    <p-button label="Cancel" [text]="true" severity="secondary" />
-    <p-button label="Save" type="submit" />
+    <p-button
+      label="Cancel"
+      [text]="true"
+      severity="secondary"
+      (onClick)="handleVisibleChange(false)"
+    />
+    <p-button
+      label="Save"
+      type="submit"
+      [disabled]="!isValidForm"
+      (onClick)="handleSubmit()"
+    />
   </ng-template>
 </p-dialog>

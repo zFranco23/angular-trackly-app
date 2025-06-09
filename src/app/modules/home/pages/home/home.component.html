@@ -1,5 +1,10 @@
 <!-- Edit/Add project modal -->
-<project-edit-modal [(show)]="isOpenProjectModal"></project-edit-modal>
+@if ( isOpenProjectModal() ) {
+<project-edit-modal
+  [(show)]="isOpenProjectModal"
+  [project]="projectToEdit"
+></project-edit-modal>
+}
 <!-- Edit/Add project modal -->
 
 <section-header
@@ -15,4 +20,4 @@
   ></p-button>
 </section-header>
 
-<projects-list></projects-list>
+<projects-list (editProject)="handleEditProject($event)"></projects-list>

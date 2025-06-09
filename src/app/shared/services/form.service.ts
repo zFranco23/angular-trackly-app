@@ -1,4 +1,6 @@
 import { FormGroup } from '@angular/forms';
+import { ErrorKey } from '@core/models/error-message.model';
+import { mapFormErrorsToMessage } from '@shared/utils/form-errors';
 
 export class FormService {
   getFormControlError(form: FormGroup, formControlName: string) {
@@ -8,9 +10,11 @@ export class FormService {
         const errors = form.controls[formControlName].errors;
 
         if (errors) {
-          const errorsValues = Object.values(errors);
-          if (errorsValues.length > 0) {
-            return errorsValues[0] ? 'Error' : null;
+          const entries = Object.entries(errors);
+
+          if (entries.length > 0) {
+            const [key] = entries[0];
+            return mapFormErrorsToMessage(key as ErrorKey);
           }
         }
       }

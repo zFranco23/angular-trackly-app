@@ -1,0 +1,27 @@
+<div class="flex flex-col gap-1 w-full">
+  <p-floatlabel variant="in">
+    <textarea
+      pTextarea
+      rows="5"
+      cols="30"
+      fluid
+      [id]="id()"
+      [value]="value()"
+      (input)="updateValue($event)"
+      [disabled]="disabled()"
+      (blur)="onTouched()"
+      [ngClass]="{
+        'w-full': true,
+        'ng-dirty': error(),
+        'ng-invalid': error()
+      }"
+    ></textarea>
+    <label [for]="id()">{{ label() }}</label>
+  </p-floatlabel>
+
+  @if(error()){
+  <p-message severity="error" variant="simple" size="small">{{
+    error()
+  }}</p-message>
+  }
+</div>

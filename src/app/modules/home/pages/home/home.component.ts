@@ -12,4 +12,12 @@ import { ProjectEditModal } from '../../../projects/components/project-edit/proj
 })
 export class HomeComponent {
   isOpenProjectModal = signal<boolean>(false);
+
+  projectToEdit = signal<any>(null);
+
+  handleEditProject(project: any) {
+    this.projectToEdit.set(project);
+
+    this.isOpenProjectModal.set(true);
+  }
 }

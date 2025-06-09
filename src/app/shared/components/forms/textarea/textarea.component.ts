@@ -7,28 +7,28 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
+import { TextareaModule } from 'primeng/textarea';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
+  selector: 'app-textarea',
+  templateUrl: './textarea.component.html',
   imports: [
     FloatLabelModule,
-    InputTextModule,
     ReactiveFormsModule,
     CommonModule,
     MessageModule,
+    TextareaModule,
   ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => AppInput),
+      useExisting: forwardRef(() => TextArea),
       multi: true,
     },
   ],
 })
-export class AppInput implements ControlValueAccessor {
+export class TextArea implements ControlValueAccessor {
   formControlName = input<FormControlName['name']>(null);
   label = input<string>();
   id = input.required<string>();
@@ -42,7 +42,7 @@ export class AppInput implements ControlValueAccessor {
 
   error = input<string | null>(null);
 
-  writeValue(value: string): void {
+  writeValue(value: any): void {
     this.value.set(value);
   }
 

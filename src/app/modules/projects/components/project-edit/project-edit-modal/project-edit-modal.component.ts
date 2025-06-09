@@ -10,6 +10,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { AppInput } from '@shared/components/forms/input/input.component';
 import { FormService } from '@shared/services/form.service';
+import { TextArea } from '../../../../../shared/components/forms/textarea/textarea.component';
 
 @Component({
   selector: 'project-edit-modal',
@@ -23,6 +24,7 @@ import { FormService } from '@shared/services/form.service';
     FileUploadModule,
     ReactiveFormsModule,
     AppInput,
+    TextArea,
   ],
   providers: [FormService],
 })
@@ -40,9 +42,13 @@ export class ProjectEditModal {
 
   editForm = this.formBuilder.group({
     projectName: ['', Validators.required],
-    repository: ['', Validators.required],
+    repository: ['', [Validators.required, Validators.pattern('https://.*')]],
     description: ['', Validators.required],
   });
+
+  get isValidForm() {
+    return this.editForm.valid && !this.editForm.pristine;
+  }
 
   handleVisibleChange(visible: boolean) {
     this.show.set(visible);
@@ -50,5 +56,10 @@ export class ProjectEditModal {
 
   handleSubmit() {
     this.editForm.markAllAsTouched();
+
+    if (this.editForm.valid) {
+      console.log('Form is valid');
+      console.log(this.editForm.value);
+    }
   }
 }

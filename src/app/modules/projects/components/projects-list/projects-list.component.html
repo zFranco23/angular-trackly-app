@@ -1,31 +1,30 @@
 <div class="my-6 text-xs">
-  <project-edit-modal [(show)]="isOPenEditModal" />
   <div
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
   >
     <!-- @for (project of projects; track $index) { -->
     <projects-list-item
-      (editClickBtn)="handleEditProject($event)"
+      (editClickBtn)="editProject.emit($event)"
       [project]="null"
     />
     <projects-list-item
-      (editClickBtn)="handleEditProject($event)"
+      (editClickBtn)="editProject.emit($event)"
       [project]="null"
     />
     <projects-list-item
-      (editClickBtn)="handleEditProject($event)"
+      (editClickBtn)="editProject.emit($event)"
       [project]="null"
     />
     <projects-list-item
-      (editClickBtn)="handleEditProject($event)"
+      (editClickBtn)="editProject.emit($event)"
       [project]="null"
     />
     <projects-list-item
-      (editClickBtn)="handleEditProject($event)"
+      (editClickBtn)="editProject.emit($event)"
       [project]="null"
     />
     <projects-list-item
-      (editClickBtn)="handleEditProject($event)"
+      (editClickBtn)="editProject.emit($event)"
       [project]="null"
     />
 
