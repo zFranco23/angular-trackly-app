@@ -1,6 +1,6 @@
 <p-drawer
-  header="Edit settings"
   [(visible)]="showDrawer"
+  header="Edit settings"
   position="right"
   styleClass="w-full md:w-80 lg:!w-100"
 >
@@ -14,13 +14,14 @@
         class="w-full"
         [fluid]="true"
         [outlined]="true"
+        (onClick)="closeModal()"
       ></p-button>
       <p-button
         label="Save"
         icon="pi pi-check"
         class="w-full"
         [fluid]="true"
-        (onClick)="closeModal()"
+        (onClick)="handleSave()"
       ></p-button>
     </div>
   </ng-template>

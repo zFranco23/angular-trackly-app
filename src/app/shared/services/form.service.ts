@@ -13,8 +13,8 @@ export class FormService {
           const entries = Object.entries(errors);
 
           if (entries.length > 0) {
-            const [key] = entries[0];
-            return mapFormErrorsToMessage(key as ErrorKey);
+            const [key, value] = entries[0];
+            return mapFormErrorsToMessage(key as ErrorKey, value);
           }
         }
       }

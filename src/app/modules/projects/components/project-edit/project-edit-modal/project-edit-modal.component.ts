@@ -11,6 +11,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AppInput } from '@shared/components/forms/input/input.component';
 import { FormService } from '@shared/services/form.service';
 import { TextArea } from '../../../../../shared/components/forms/textarea/textarea.component';
+import { CustomValidators } from '@shared/utils/validators';
 
 @Component({
   selector: 'project-edit-modal',
@@ -42,7 +43,13 @@ export class ProjectEditModal {
 
   editForm = this.formBuilder.group({
     projectName: ['', Validators.required],
-    repository: ['', [Validators.required, Validators.pattern('https://.*')]],
+    repository: [
+      '',
+      [
+        Validators.required,
+        CustomValidators.pattern('https://.*', 'Invalid repository URL'),
+      ],
+    ],
     description: ['', Validators.required],
   });
 

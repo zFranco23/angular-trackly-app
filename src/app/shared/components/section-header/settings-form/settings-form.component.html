@@ -1,21 +1,29 @@
-<form action="" class="grid gap-6">
-  <p-floatlabel variant="in" class="w-full">
-    <input pInputText id="Name" autocomplete="off" class="w-full" />
-    <label for="in_label">First name</label>
-  </p-floatlabel>
+<form [formGroup]="editForm" class="grid gap-6">
+  <app-input
+    formControlName="name"
+    label="Name"
+    id="name"
+    [error]="formsService.getFormControlError(editForm, 'name')"
+  />
 
-  <p-floatlabel variant="in" class="w-full">
-    <input pInputText id="Name" autocomplete="off" class="w-full" />
-    <label for="in_label">Last name</label>
-  </p-floatlabel>
+  <app-input
+    formControlName="lastName"
+    label="Last name"
+    id="lastName"
+    [error]="formsService.getFormControlError(editForm, 'lastName')"
+  />
 
-  <p-floatlabel variant="in" class="w-full">
-    <input pInputText id="Name" autocomplete="off" class="w-full" />
-    <label for="in_label">User name</label>
-  </p-floatlabel>
+  <app-input
+    formControlName="userName"
+    label="User name"
+    id="userName"
+    [error]="formsService.getFormControlError(editForm, 'userName')"
+  />
 
-  <p-floatlabel variant="in" class="w-full">
-    <input pInputText id="Name" autocomplete="off" class="w-full" />
-    <label for="in_label">Email</label>
-  </p-floatlabel>
+  <app-input
+    formControlName="email"
+    label="Email"
+    id="email"
+    [error]="formsService.getFormControlError(editForm, 'email')"
+  />
 </form>
