@@ -15,7 +15,15 @@
   <p-button
     ngProjectAs="actions"
     icon="pi pi-plus"
+    class="lg:hidden"
+    (click)="isOpenProjectModal.set(true)"
+  ></p-button>
+
+  <p-button
+    ngProjectAs="actions"
+    icon="pi pi-plus"
     label="Add project"
+    class="hidden lg:block"
     (click)="isOpenProjectModal.set(true)"
   ></p-button>
 </section-header>

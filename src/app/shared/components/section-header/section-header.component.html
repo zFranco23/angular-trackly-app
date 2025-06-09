@@ -1,8 +1,13 @@
 <div class="w-full flex items-center justify-between">
   <div class="flex gap-4 items-center">
-    <h1 class="text-4xl font-bold text-primary-500">
-      {{ title() }}
-    </h1>
+    <div class="flex gap-1 items-center">
+      <app-menu></app-menu>
+      <h1
+        class="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-primary-500"
+      >
+        {{ title() }}
+      </h1>
+    </div>
 
     @if(showTooltip()){
     <i

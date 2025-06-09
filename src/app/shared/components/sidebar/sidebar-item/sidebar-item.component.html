@@ -1,11 +1,13 @@
 <li>
   @if (children().length === 0){
   <a
-    href="#"
+    [routerLink]="link()"
+    routerLinkActive="bg-gray-100 dark:bg-gray-700"
     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+    #rla="routerLinkActive"
   >
     <span
-      class="pi pi-search transition duration-75 text-gray-400 group-hover:text-white"
+      [class]="`${icon()} transition duration-75 text-gray-400 ${rla.isActive ? 'text-white' : 'text-gray-400'} group-hover:text-white `"
     ></span>
     <span class="ms-3">{{ title() | titlecase }}</span>
   </a>
@@ -21,7 +23,7 @@
     (click)="toggleExpanded()"
   >
     <span
-      class="pi pi-search transition duration-75 text-gray-400 group-hover:text-white"
+      [class]="`${icon()} transition duration-75 text-gray-400 group-hover:text-white`"
     ></span>
     <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap"
       >E-commerce</span

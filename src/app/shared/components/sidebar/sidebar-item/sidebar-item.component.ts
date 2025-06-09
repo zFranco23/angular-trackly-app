@@ -1,18 +1,18 @@
 import { Component, input, signal } from '@angular/core';
 import { SidebarItem as SidebarItemModel } from '../../../../core/models';
-import { SidebarItemType as SidebarItemTypeEnum } from '../../../../core/enums/ui.enum';
 import { TitleCasePipe } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'sidebar-item',
   templateUrl: './sidebar-item.component.html',
-  imports: [TitleCasePipe],
+  imports: [TitleCasePipe, RouterLink, RouterLinkActive],
 })
 export class SidebarItem {
-  SidebarItemTypeEnum = SidebarItemTypeEnum;
-
+  link = input<string>('');
+  icon = input.required<SidebarItemModel['icon']>();
   title = input.required<SidebarItemModel['title']>();
-  children = input<SidebarItemModel[]>([]);
+  children = input<Omit<SidebarItemModel, 'icon'>[]>([]);
 
   isExpanded = signal(false);
 
