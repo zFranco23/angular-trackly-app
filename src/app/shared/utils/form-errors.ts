@@ -7,6 +7,7 @@ export const mapFormErrorsToMessage = (errorKey: ErrorKey, value: any) => {
       required: 'Field required',
       pattern: message,
       email: 'Invalid email',
+      minlength: message,
     }[errorKey] ?? 'This field is invalid'
   );
 };
@@ -16,6 +17,9 @@ const getMessage = (errorKey: ErrorKey, value: any) => {
     case 'pattern':
       const customMessage = value.custom;
       return customMessage ?? 'This field does not match the required format';
+
+    case 'minlength':
+      return `This field must have at least ${value.requiredLength} characters`;
 
     default:
       return 'This field is invalid';

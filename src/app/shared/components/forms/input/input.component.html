@@ -1,26 +1,21 @@
 <div class="flex flex-col gap-1 w-full">
-  <p-floatlabel variant="in">
-    <input
-      pInputText
-      autocomplete="off"
-      fluid
-      [id]="id()"
-      [value]="value()"
-      (input)="updateValue($event)"
-      [disabled]="disabled()"
-      (blur)="onTouched()"
-      [ngClass]="{
-        'w-full': true,
-        'ng-dirty': error(),
-        'ng-invalid': error()
-      }"
-    />
-    <label [for]="id()">{{ label() }}</label>
-  </p-floatlabel>
-
-  @if(error()){
-  <p-message severity="error" variant="simple" size="small">{{
-    error()
-  }}</p-message>
-  }
+  <with-error [error]="error()">
+    <with-label [inputId]="id()" [label]="label()">
+      <input
+        pInputText
+        autocomplete="off"
+        fluid
+        [id]="id()"
+        [value]="value()"
+        (input)="updateValue($event)"
+        [disabled]="disabled()"
+        (blur)="onTouched()"
+        [ngClass]="{
+          'w-full': true,
+          'ng-dirty': error(),
+          'ng-invalid': error()
+        }"
+      />
+    </with-label>
+  </with-error>
 </div>

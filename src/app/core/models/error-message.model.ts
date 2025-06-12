@@ -1,1 +1,1 @@
-export type ErrorKey = 'required' | 'pattern';
+export type ErrorKey = 'required' | 'pattern' | 'minlength';

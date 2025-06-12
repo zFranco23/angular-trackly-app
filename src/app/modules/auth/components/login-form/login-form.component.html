@@ -1,9 +1,14 @@
-<form class="space-y-6" action="#" method="POST">
+<form class="space-y-6" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div>
     <label for="email" class="block text-sm/6 font-medium text-gray-900 mb-2"
       >Email address</label
     >
-    <app-input id="email" label="Email address"></app-input>
+    <app-input
+      id="email"
+      label="Email address"
+      formControlName="email"
+      [error]="formService.getFormControlError(loginForm, 'email')"
+    ></app-input>
   </div>
 
   <div>
@@ -18,13 +23,21 @@
       </div>
     </div>
 
-    <p-floatlabel variant="in">
-      <p-password fluid inputId="password" />
-      <label for="password">Password</label>
-    </p-floatlabel>
+    <with-error
+      [error]="formService.getFormControlError(loginForm, 'password')"
+    >
+      <with-label inputId="password" label="Password">
+        <p-password
+          fluid
+          inputId="password"
+          formControlName="password"
+          [class]="`w-full ${formService.getFormControlError(loginForm, 'password')? 'ng-dirty ng-invalid' : ''}`"
+        />
+      </with-label>
+    </with-error>
   </div>
 
   <div>
-    <p-button fluid class="font-bold">Sign in</p-button>
+    <p-button type="submit" fluid class="font-bold">Sign in</p-button>
   </div>
 </form>

@@ -8,7 +8,8 @@ import {
 } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
-import { MessageModule } from 'primeng/message';
+import { WithErrorComponent } from '../with-error/with-error.component';
+import { WithLabelComponent } from '../with-label/with-label.component';
 
 @Component({
   selector: 'app-input',
@@ -18,7 +19,8 @@ import { MessageModule } from 'primeng/message';
     InputTextModule,
     ReactiveFormsModule,
     CommonModule,
-    MessageModule,
+    WithErrorComponent,
+    WithLabelComponent,
   ],
   providers: [
     {
