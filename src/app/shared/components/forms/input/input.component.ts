@@ -30,7 +30,7 @@ import { MessageModule } from 'primeng/message';
 })
 export class AppInput implements ControlValueAccessor {
   formControlName = input<FormControlName['name']>(null);
-  label = input<string>();
+  label = input.required<string>();
   id = input.required<string>();
 
   value = signal<string>('');

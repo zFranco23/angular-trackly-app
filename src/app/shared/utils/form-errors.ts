@@ -15,7 +15,7 @@ const getMessage = (errorKey: ErrorKey, value: any) => {
   switch (errorKey) {
     case 'pattern':
       const customMessage = value.custom;
-      return customMessage ?? 'This field is invalid';
+      return customMessage ?? 'This field does not match the required format';
 
     default:
       return 'This field is invalid';
