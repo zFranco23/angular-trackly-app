@@ -32,6 +32,8 @@
           inputId="password"
           formControlName="password"
           [class]="`w-full ${formService.getFormControlError(loginForm, 'password')? 'ng-dirty ng-invalid' : ''}`"
+          [feedback]="false"
+          [toggleMask]="true"
         />
       </with-label>
     </with-error>
