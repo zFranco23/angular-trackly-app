@@ -28,4 +28,8 @@
   ></p-button>
 </section-header>
 
-<projects-list (editProject)="handleEditProject($event)"></projects-list>
+<projects-list
+  (editProject)="handleEditProject($event)"
+  [projects]="projects()"
+  [isLoading]="isLoading()"
+></projects-list>

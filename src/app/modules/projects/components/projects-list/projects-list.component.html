@@ -2,40 +2,21 @@
   <div
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
   >
-    <!-- @for (project of projects; track $index) { -->
-    <projects-list-item
-      (editClickBtn)="editProject.emit($event)"
-      [project]="null"
-    />
-    <projects-list-item
-      (editClickBtn)="editProject.emit($event)"
-      [project]="null"
-    />
-    <projects-list-item
-      (editClickBtn)="editProject.emit($event)"
-      [project]="null"
-    />
-    <projects-list-item
-      (editClickBtn)="editProject.emit($event)"
-      [project]="null"
-    />
-    <projects-list-item
-      (editClickBtn)="editProject.emit($event)"
-      [project]="null"
-    />
-    <projects-list-item
-      (editClickBtn)="editProject.emit($event)"
-      [project]="null"
-    />
-    <projects-list-item
-      (editClickBtn)="editProject.emit($event)"
-      [project]="null"
-    />
-    <projects-list-item
-      (editClickBtn)="editProject.emit($event)"
-      [project]="null"
-    />
+    @if (isLoading()) {
+    <projects-skeleton />
+    }
+    <!--  -->
 
-    <!-- } -->
+    @else if (projects().length === 0) {
+    <p class="text-md font-medium">No projects found</p>
+    }
+
+    <!-- -->
+    @else { @for (project of projects(); track project.id) {
+    <projects-list-item
+      (editClickBtn)="editProject.emit($event)"
+      [project]="project"
+    />
+    } }
   </div>
 </div>

@@ -1,6 +1,7 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import type { Project } from '@modules/projects/models/project.model';
 
 @Component({
   selector: 'projects-list-item',
@@ -8,7 +9,7 @@ import { ButtonModule } from 'primeng/button';
   imports: [CardModule, ButtonModule],
 })
 export class ProjectsListItem {
-  project = input.required();
+  project = input.required<Project>();
 
   editClickBtn = output<any>();
 

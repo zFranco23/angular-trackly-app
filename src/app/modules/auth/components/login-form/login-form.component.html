@@ -40,6 +40,8 @@
   </div>
 
   <div>
-    <p-button type="submit" fluid class="font-bold">Sign in</p-button>
+    <p-button type="submit" fluid class="font-bold" [disabled]="isLoading()"
+      >Sign in</p-button
+    >
   </div>
 </form>
