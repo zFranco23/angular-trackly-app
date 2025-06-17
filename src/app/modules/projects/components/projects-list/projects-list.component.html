@@ -12,11 +12,15 @@
     }
 
     <!-- -->
-    @else { @for (project of projects(); track project.id) {
+    @else {
+    <!--  -->
+    @for (project of projects(); track project.id) {
     <projects-list-item
       (editClickBtn)="editProject.emit($event)"
       [project]="project"
     />
-    } }
+    }
+    <!--  -->
+    }
   </div>
 </div>

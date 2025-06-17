@@ -2,7 +2,7 @@
 @if ( isOpenProjectModal() ) {
 <project-edit-modal
   [(show)]="isOpenProjectModal"
-  [project]="projectToEdit"
+  [project]="projectToEdit()"
 ></project-edit-modal>
 }
 <!-- Edit/Add project modal -->
@@ -16,7 +16,7 @@
     ngProjectAs="actions"
     icon="pi pi-plus"
     class="lg:hidden"
-    (click)="isOpenProjectModal.set(true)"
+    (click)="handleAddProject()"
   ></p-button>
 
   <p-button
@@ -24,7 +24,7 @@
     icon="pi pi-plus"
     label="Add project"
     class="hidden lg:block"
-    (click)="isOpenProjectModal.set(true)"
+    (click)="handleAddProject()"
   ></p-button>
 </section-header>
 

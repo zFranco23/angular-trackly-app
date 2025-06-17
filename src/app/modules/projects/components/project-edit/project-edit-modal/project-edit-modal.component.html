@@ -21,10 +21,10 @@
     (ngSubmit)="handleSubmit()"
   >
     <app-input
-      formControlName="projectName"
+      formControlName="name"
       label="Project name"
       id="projectName"
-      [error]="formsService.getFormControlError(editForm, 'projectName')"
+      [error]="formsService.getFormControlError(editForm, 'name')"
     />
 
     <app-input
@@ -47,11 +47,12 @@
       label="Cancel"
       [outlined]="true"
       (onClick)="handleVisibleChange(false)"
+      [disabled]="isSaving()"
     />
     <p-button
       label="Save"
       type="submit"
-      [disabled]="!isValidForm"
+      [disabled]="!isValidForm || isSaving()"
       (onClick)="handleSubmit()"
     />
   </ng-template>

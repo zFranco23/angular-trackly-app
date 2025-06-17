@@ -1,34 +1,37 @@
-<div class="flex items-center justify-center">
-  <p-card class="overflow-hidden rounded-lg shadow-lg">
-    <ng-template #header>
-      <img
-        alt="Card"
+<p-card
+  class="overflow-hidden rounded-lg shadow-lg h-full"
+  [style]="{ height: '100%' }"
+>
+  <ng-template #header>
+    <img
+      alt="Card"
+      class="w-full"
+      src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+    />
+  </ng-template>
+  <ng-template #title>{{ project().name }}</ng-template>
+  <ng-template #subtitle> Project subtitle </ng-template>
+  <p class="project-description h-12">
+    {{ project().description }}
+  </p>
+  <ng-template #footer>
+    <div class="flex gap-4 mt-1">
+      <a
+        [href]="project().repository"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="p-button p-button-secondary p-button-outlined font-bold w-full"
+      >
+        <i class="pi pi-github"></i>
+      </a>
+      <p-button
         class="w-full"
-        src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
-      />
-    </ng-template>
-    <ng-template #title>{{ project().name }}</ng-template>
-    <ng-template #subtitle> Project subtitle </ng-template>
-    <p>{{ project().description }}</p>
-    <ng-template #footer>
-      <div class="flex gap-4 mt-1">
-        <a
-          [href]="project().repository"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="p-button p-button-secondary p-button-outlined font-bold w-full"
-        >
-          <i class="pi pi-github"></i>
-        </a>
-        <p-button
-          class="w-full"
-          styleClass="w-full"
-          fluid
-          (onClick)="editClickBtn.emit(project())"
-        >
-          <i class="pi pi-pencil"></i>
-        </p-button>
-      </div>
-    </ng-template>
-  </p-card>
-</div>
+        styleClass="w-full"
+        fluid
+        (onClick)="editClickBtn.emit(project())"
+      >
+        <i class="pi pi-pencil"></i>
+      </p-button>
+    </div>
+  </ng-template>
+</p-card>

@@ -7,13 +7,14 @@ import type { Project } from '@modules/projects/models/project.model';
   selector: 'projects-list-item',
   templateUrl: './project-list-item.component.html',
   imports: [CardModule, ButtonModule],
+  styleUrls: ['./project-list-item.component.scss'],
 })
 export class ProjectsListItem {
   project = input.required<Project>();
 
-  editClickBtn = output<any>();
+  editClickBtn = output<Project>();
 
   handleEditProject() {
-    this.editClickBtn.emit(this.project);
+    this.editClickBtn.emit(this.project());
   }
 }

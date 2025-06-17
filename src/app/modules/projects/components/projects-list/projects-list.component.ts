@@ -8,10 +8,17 @@ import type { Project } from '@modules/projects/models/project.model';
   selector: 'projects-list',
   templateUrl: './projects-list.component.html',
   imports: [ProjectsListItem, ProjectsSkeleton],
+  styles: [
+    `
+      :host {
+        display: contents;
+      }
+    `,
+  ],
 })
 export class ProjectsList {
   projects = input.required<Project[]>();
   isLoading = input.required<boolean>();
 
-  editProject = output<any>();
+  editProject = output<Project>();
 }

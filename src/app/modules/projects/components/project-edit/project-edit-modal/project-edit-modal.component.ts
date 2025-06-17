@@ -1,4 +1,12 @@
-import { Component, computed, inject, input, model } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  model,
+  signal,
+} from '@angular/core';
 
 import { DialogModule } from 'primeng/dialog';
 import { FloatLabelModule } from 'primeng/floatlabel';
@@ -12,6 +20,13 @@ import { AppInput } from '@shared/components/forms/input/input.component';
 import { FormService } from '@shared/services/form.service';
 import { TextArea } from '../../../../../shared/components/forms/textarea/textarea.component';
 import { CustomValidators } from '@shared/utils/validators';
+import { ProjectsService } from '@modules/projects/services/projects.service';
+import { CreateProjectRequest } from '@modules/projects/models/http';
+import { finalize, tap } from 'rxjs';
+import { MessageService } from 'primeng/api';
+import { REGEX } from '@core/constants/regex';
+
+import type { Project } from '@modules/projects/models/project.model';
 
 @Component({
   selector: 'project-edit-modal',
@@ -31,26 +46,53 @@ import { CustomValidators } from '@shared/utils/validators';
 })
 export class ProjectEditModal {
   show = model.required<boolean>();
-  project = input<any>();
+  project = input<Project | null>(null);
+  isSaving = signal<boolean>(false);
 
-  isEditing = computed(() => !!this.project);
+  isEditing = computed(() => !!this.project());
   title = computed(() => (this.isEditing() ? 'Edit project' : 'Add project'));
 
   formsService = inject(FormService);
+  projectsService = inject(ProjectsService);
+  messageService = inject(MessageService);
 
   /** Forms control */
   private formBuilder = inject(FormBuilder);
 
   editForm = this.formBuilder.group({
-    projectName: ['', Validators.required],
+    name: [
+      '',
+      [Validators.required, Validators.minLength(6), Validators.maxLength(50)],
+    ],
     repository: [
       '',
       [
         Validators.required,
-        CustomValidators.pattern('https://.*', 'Invalid repository URL'),
+        CustomValidators.pattern(REGEX.URL, 'Invalid repository URL'),
       ],
     ],
-    description: ['', Validators.required],
+    description: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(200),
+      ],
+    ],
+  });
+
+  setInitialValuesEffect = effect(() => {
+    if (this.show() && this.project()) {
+      this.editForm.patchValue({
+        name: this.project()!.name,
+        repository: this.project()!.repository,
+        description: this.project()!.description,
+      });
+
+      this.editForm.markAsPristine();
+    } else {
+      this.editForm.reset();
+    }
   });
 
   get isValidForm() {
@@ -65,8 +107,28 @@ export class ProjectEditModal {
     this.editForm.markAllAsTouched();
 
     if (this.editForm.valid) {
-      console.log('Form is valid');
-      console.log(this.editForm.value);
+      if (this.isEditing()) {
+        // this.projectsService.updateProject(this.project()!, this.editForm.value);
+      } else {
+        this.isSaving.set(true);
+        this.projectsService
+          .createProject(this.editForm.value as CreateProjectRequest)
+          .pipe(
+            tap(() => {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Project created',
+                detail: 'Project created successfully',
+              });
+              this.show.set(false);
+            }),
+
+            finalize(() => {
+              this.isSaving.set(false);
+            })
+          )
+          .subscribe();
+      }
     }
   }
 }

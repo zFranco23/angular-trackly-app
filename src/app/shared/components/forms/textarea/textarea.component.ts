@@ -9,6 +9,8 @@ import {
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { MessageModule } from 'primeng/message';
 import { TextareaModule } from 'primeng/textarea';
+import { WithErrorComponent } from '../with-error/with-error.component';
+import { WithLabelComponent } from '../with-label/with-label.component';
 
 @Component({
   selector: 'app-textarea',
@@ -19,6 +21,8 @@ import { TextareaModule } from 'primeng/textarea';
     CommonModule,
     MessageModule,
     TextareaModule,
+    WithErrorComponent,
+    WithLabelComponent,
   ],
   providers: [
     {
@@ -30,7 +34,7 @@ import { TextareaModule } from 'primeng/textarea';
 })
 export class TextArea implements ControlValueAccessor {
   formControlName = input<FormControlName['name']>(null);
-  label = input<string>();
+  label = input.required<string>();
   id = input.required<string>();
 
   value = signal<string>('');

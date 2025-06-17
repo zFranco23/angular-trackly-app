@@ -1,0 +1,9 @@
+:host {
+  display: contents;
+}
+
+.project-description {
+  word-wrap: break-word; /* para navegadores antiguos */
+  overflow-wrap: break-word; /* preferido */
+  white-space: normal;
+}
