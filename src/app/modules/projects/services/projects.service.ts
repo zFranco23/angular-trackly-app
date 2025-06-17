@@ -3,7 +3,10 @@ import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment.development';
 import { handleLoadingIndicator } from '@shared/operators/handle-loading-indicator.operator';
-import type { CreateProjectRequest } from '../models/http';
+import type {
+  CreateProjectRequest,
+  UpdateProjectRequest,
+} from '../models/http';
 import type { Project } from '../models/project.model';
 
 @Injectable({
@@ -24,6 +27,12 @@ export class ProjectsService {
       .subscribe((projects) => {
         this.projects.set(projects);
       });
+  }
+
+  updateProject(id: string, body: UpdateProjectRequest) {
+    return this.http
+      .patch<Project>(`${this.projectsApiUrl}/${id}`, body)
+      .pipe(tap(() => this.getUserProjects()));
   }
 
   createProject(body: CreateProjectRequest) {

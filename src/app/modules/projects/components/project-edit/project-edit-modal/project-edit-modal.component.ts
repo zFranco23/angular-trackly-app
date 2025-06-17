@@ -21,7 +21,10 @@ import { FormService } from '@shared/services/form.service';
 import { TextArea } from '../../../../../shared/components/forms/textarea/textarea.component';
 import { CustomValidators } from '@shared/utils/validators';
 import { ProjectsService } from '@modules/projects/services/projects.service';
-import { CreateProjectRequest } from '@modules/projects/models/http';
+import {
+  CreateProjectRequest,
+  UpdateProjectRequest,
+} from '@modules/projects/models/http';
 import { finalize, tap } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { REGEX } from '@core/constants/regex';
@@ -108,7 +111,27 @@ export class ProjectEditModal {
 
     if (this.editForm.valid) {
       if (this.isEditing()) {
-        // this.projectsService.updateProject(this.project()!, this.editForm.value);
+        this.isSaving.set(true);
+        this.projectsService
+          .updateProject(
+            this.project()!.id,
+            this.editForm.value as UpdateProjectRequest
+          )
+          .pipe(
+            tap(() => {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Project updated',
+                detail: 'Project updated successfully',
+              });
+              this.show.set(false);
+            }),
+
+            finalize(() => {
+              this.isSaving.set(false);
+            })
+          )
+          .subscribe();
       } else {
         this.isSaving.set(true);
         this.projectsService
