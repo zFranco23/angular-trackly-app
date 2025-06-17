@@ -1,6 +1,6 @@
 type AnyObject = Record<string, any>;
 
-export const getDifferences = <T extends AnyObject>(
+export const getDifferentProperties = <T extends AnyObject>(
   original: T,
   changed: T
 ): Partial<T> => {
@@ -20,7 +20,7 @@ export const getDifferences = <T extends AnyObject>(
       !Array.isArray(val1) &&
       !Array.isArray(val2)
     ) {
-      const nestedDiff = getDifferences(val1, val2);
+      const nestedDiff = getDifferentProperties(val1, val2);
       if (Object.keys(nestedDiff).length > 0) {
         diff[key] = nestedDiff as T[keyof T];
       }

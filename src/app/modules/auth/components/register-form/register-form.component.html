@@ -1,0 +1,62 @@
+<form class="space-y-6" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="email" class="block text-sm/6 font-medium text-gray-900 mb-2"
+      >Email address</label
+    >
+    <app-input
+      id="email"
+      label="Email address"
+      formControlName="email"
+      [error]="formService.getFormControlError(registerForm, 'email')"
+    ></app-input>
+  </div>
+
+  <div>
+    <label for="name" class="block text-sm/6 font-medium text-gray-900 mb-2"
+      >Name</label
+    >
+    <app-input
+      id="name"
+      label="Name"
+      formControlName="name"
+      [error]="formService.getFormControlError(registerForm, 'name')"
+    ></app-input>
+  </div>
+
+  <div>
+    <label for="lastName" class="block text-sm/6 font-medium text-gray-900 mb-2"
+      >Last name</label
+    >
+    <app-input
+      id="lastName"
+      label="Last name"
+      formControlName="lastName"
+      [error]="formService.getFormControlError(registerForm, 'lastName')"
+    ></app-input>
+  </div>
+
+  <div>
+    <label for="password" class="block text-sm/6 font-medium text-gray-900 mb-2"
+      >Password</label
+    >
+
+    <with-error
+      [error]="formService.getFormControlError(registerForm, 'password')"
+    >
+      <with-label inputId="password" label="Password">
+        <p-password
+          fluid
+          inputId="password"
+          formControlName="password"
+          [class]="`w-full ${formService.getFormControlError(registerForm, 'password')? 'ng-dirty ng-invalid' : ''}`"
+          [feedback]="false"
+          [toggleMask]="true"
+        />
+      </with-label>
+    </with-error>
+  </div>
+
+  <p-button type="submit" fluid class="font-bold" [disabled]="isLoading()"
+    >Create account</p-button
+  >
+</form>

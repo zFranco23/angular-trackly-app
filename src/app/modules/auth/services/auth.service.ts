@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { LoginRequest } from '../models/request.model';
+import { LoginRequest, RegisterRequest } from '../models/http/request.model';
 import { environment } from '@environments/environment.development';
-import { LoginResponse } from '../models/response.model';
+import { LoginResponse } from '../models/http/response.model';
+import { User } from '../models/user.model';
 
 @Injectable()
 export class AuthService {
@@ -14,5 +15,9 @@ export class AuthService {
       `${environment.apiUrl}/auth/login`,
       data
     );
+  }
+
+  registerUser(data: RegisterRequest) {
+    return this.http.post<User>(`${environment.apiUrl}/auth/register`, data);
   }
 }

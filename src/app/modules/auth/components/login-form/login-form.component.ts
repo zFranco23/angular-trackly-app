@@ -10,7 +10,7 @@ import { WithErrorComponent } from '@shared/components/forms/with-error/with-err
 import { WithLabelComponent } from '@shared/components/forms/with-label/with-label.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { LoginRequest } from '@modules/auth/models/request.model';
+import { LoginRequest } from '@modules/auth/models/http/request.model';
 import { handleLoadingIndicator } from '@shared/operators/handle-loading-indicator.operator';
 import { MessageService } from 'primeng/api';
 

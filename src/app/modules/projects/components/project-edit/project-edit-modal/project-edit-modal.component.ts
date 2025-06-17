@@ -28,6 +28,7 @@ import {
 import { finalize, tap } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { REGEX } from '@core/constants/regex';
+import { getDifferentProperties } from '@shared/utils/object';
 
 import type { Project } from '@modules/projects/models/project.model';
 
@@ -111,12 +112,16 @@ export class ProjectEditModal {
 
     if (this.editForm.valid) {
       if (this.isEditing()) {
+        const tempValues = this.editForm.value;
+        const differentPropertiesToUpdate: UpdateProjectRequest =
+          getDifferentProperties<Project>(
+            this.project()!,
+            tempValues as Project
+          );
+
         this.isSaving.set(true);
         this.projectsService
-          .updateProject(
-            this.project()!.id,
-            this.editForm.value as UpdateProjectRequest
-          )
+          .updateProject(this.project()!.id, differentPropertiesToUpdate)
           .pipe(
             tap(() => {
               this.messageService.add({
