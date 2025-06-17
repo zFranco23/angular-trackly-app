@@ -1,9 +1,23 @@
+@if (userStore.user()) {
 <div class="flex items-center gap-4">
-  <img class="w-10 h-10 rounded-full" [src]="getAvatarImage" alt="avatar" />
+  <img class="w-10 h-10 rounded-full" [src]="imageSrc()" alt="avatar" />
   <div class="font-medium dark:text-white">
-    <div>{{ name() }}</div>
+    <div>
+      {{ name() }}
+      {{ lastName() }}
+    </div>
     <div class="text-sm text-gray-500 dark:text-gray-400">
       Joined in August 2025
     </div>
   </div>
 </div>
+}@else {
+
+<div class="flex items-center gap-4">
+  <p-skeleton shape="circle" size="2.5rem"></p-skeleton>
+  <div class="flex flex-col gap-2">
+    <p-skeleton width="7rem" height="1.25rem"></p-skeleton>
+    <p-skeleton width="9rem" height="1rem"></p-skeleton>
+  </div>
+</div>
+}

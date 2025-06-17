@@ -6,7 +6,9 @@ import { environment } from '@environments/environment.development';
 import { LoginResponse } from '../models/http/response.model';
 import { User } from '../models/user.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
   private http = inject(HttpClient);
 
@@ -19,5 +21,9 @@ export class AuthService {
 
   registerUser(data: RegisterRequest) {
     return this.http.post<User>(`${environment.apiUrl}/auth/register`, data);
+  }
+
+  getProfile() {
+    return this.http.get<User>(`${environment.apiUrl}/users`);
   }
 }

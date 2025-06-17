@@ -11,8 +11,10 @@ import { WithLabelComponent } from '@shared/components/forms/with-label/with-lab
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { LoginRequest } from '@modules/auth/models/http/request.model';
-import { handleLoadingIndicator } from '@shared/operators/handle-loading-indicator.operator';
+// import { handleLoadingIndicator } from '@shared/operators/handle-loading-indicator.operator';
 import { MessageService } from 'primeng/api';
+import { tap } from 'rxjs';
+// import { UserStore } from '../../stores/user.store';
 
 @Component({
   selector: 'login-form',
@@ -36,8 +38,9 @@ export class LoginForm {
 
   formService = inject(FormService);
   authService = inject(AuthService);
-
   messageService = inject(MessageService);
+
+  // userStore = inject(UserStore);
 
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -48,17 +51,28 @@ export class LoginForm {
     this.loginForm.markAllAsTouched();
 
     if (this.loginForm.valid) {
+      this.isLoading.set(true);
       this.authService
         .login(this.loginForm.value as LoginRequest)
-        .pipe(handleLoadingIndicator(this.isLoading))
+        .pipe(
+          tap((res) => {
+            localStorage.setItem('token', res.accessToken);
+          })
+          // delay(1000),
+          // switchMap(() => this.authService.getProfile()),
+          // tap((res) => {
+          //   this.userStore.user.set(res);
+          // })
+        )
         .subscribe({
           next: (res) => {
             if (res) {
-              localStorage.setItem('token', res.accessToken);
               this.router.navigate(['/dashboard']);
+              this.isLoading.set(false);
             }
           },
           error: (err) => {
+            this.isLoading.set(false);
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
